@@ -1,20 +1,16 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include <string>
-
-typedef std::vector<std::string> EntriesText;
+#include "../src/glyph.h";
 
 class GlyphTranslator {
 public:
 	GlyphTranslator();
-	GlyphTranslator(const EntriesText&entries);
+	GlyphTranslator(const OcrEntriesText&entries);
 	virtual ~GlyphTranslator();
 
-	void SetEntries(EntriesText const entries);
+	virtual void SetEntries(OcrEntriesText const entries);
 
-	std::string GetValues();
+	virtual std::string GetValues();
 
 private:
-	std::string values;
+	std::string _values;
 };

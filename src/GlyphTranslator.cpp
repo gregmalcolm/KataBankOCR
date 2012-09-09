@@ -1,23 +1,23 @@
 #include "GlyphTranslator.h"
 
-GlyphTranslator::GlyphTranslator() : values("") {
+GlyphTranslator::GlyphTranslator() : _values("") {
 }
 
-GlyphTranslator::GlyphTranslator(const EntriesText& entries) {
+GlyphTranslator::GlyphTranslator(const OcrEntriesText& entries) {
 	SetEntries(entries);
 }
 
 GlyphTranslator::~GlyphTranslator() {
 }
 
-void GlyphTranslator::SetEntries(EntriesText const entries) {
+void GlyphTranslator::SetEntries(OcrEntriesText const entries) {
 	if (entries[0].compare(" ") == 0) {
-		values += "1";
+		_values += "1";
 	} else {
-		values += "9";
+		_values += "9";
 	}
 }
 
 std::string GlyphTranslator::GetValues() {
-	return values;
+	return _values;
 }
