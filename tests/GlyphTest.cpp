@@ -25,20 +25,24 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_then_it_matches) {
 			              "  "};
 	OcrEntriesText entries(arr, arr + 4);
 
-	bool wasRead = glyph.get()->MatchFrontOfOcrEntries(entries);
-	CHECK(wasRead);
+	bool isMatch = glyph.get()->MatchBackOfOcrEntries(entries);
+	CHECK(isMatch);
 }
 
-//TEST(Glyph_given_glyph_is_3, when_entry_is_empty_then_it_does_not_match) {
-//	std::string arr[] = { "",
-//			              "",
-//			              "",
-//			              ""};
-//	OcrEntriesText entries(arr, arr + 4);
-//
-//	bool wasRead = glyph.get()->Read(entries);
-//	CHECK(!wasRead);
-//}
+TEST(Glyph_given_glyph_is_3, when_entry_is_empty_then_it_does_not_match) {
+	std::string arr[] = { "",
+			              "",
+			              "",
+			              ""};
+	OcrEntriesText entries(arr, arr + 4);
+
+	bool isMatch = glyph.get()->MatchBackOfOcrEntries(entries);
+	CHECK(!isMatch);
+}
+
+TEST(Glyph_given_glyph_is_3, then_it_has_a_height_of_4) {
+	CHECK_EQUAL(4, glyph.get()->Height());
+}
 
 TEST(Glyph_given_glyph_is_3, then_it_has_a_width_of_2) {
 	CHECK_EQUAL(2, glyph.get()->Width());
