@@ -1,3 +1,5 @@
 *.o
 cpputest*
 *.log
+Debug/
+Release/
