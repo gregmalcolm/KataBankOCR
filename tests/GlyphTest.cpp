@@ -29,10 +29,43 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_then_it_matches) {
 	CHECK(isMatch);
 }
 
+TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_4_then_it_matches) {
+	std::string arr[] = { "_     ",
+			              "_| |_|",
+			              "_|   |",
+			              "      "};
+	OcrEntriesText entries(arr, arr + 4);
+
+	bool isMatch = glyph.get()->MatchBackOfOcrEntries(entries);
+	CHECK(isMatch);
+}
+
+TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_4_3_then_it_does_not_match) {
+	std::string arr[] = { "    _ ",
+			              "|_| _|",
+			              "  | _|",
+			              "      "};
+	OcrEntriesText entries(arr, arr + 4);
+
+	bool isMatch = glyph.get()->MatchBackOfOcrEntries(entries);
+	CHECK(!isMatch);
+}
+
 TEST(Glyph_given_glyph_is_3, when_entry_is_empty_then_it_does_not_match) {
 	std::string arr[] = { "",
 			              "",
 			              "",
+			              ""};
+	OcrEntriesText entries(arr, arr + 4);
+
+	bool isMatch = glyph.get()->MatchBackOfOcrEntries(entries);
+	CHECK(!isMatch);
+}
+
+TEST(Glyph_given_glyph_is_3, when_entry_is_missing_whitespace_then_it_does_not_match) {
+	std::string arr[] = { "_ ",
+			              "_|",
+			              "_|",
 			              ""};
 	OcrEntriesText entries(arr, arr + 4);
 
