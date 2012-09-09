@@ -7,10 +7,10 @@
 
 class Glyph {
 public:
-	Glyph(OcrEntriesText const glyphText);
+	Glyph(OcrEntriesArray const glyphArray);
 	virtual ~Glyph();
 
-	virtual bool MatchBackOfOcrEntries(const OcrEntriesText entries);
+	virtual bool MatchBackOfOcrEntries(const OcrEntriesArray entries);
 
 	virtual void validate() const;
 	virtual int Width() const;
@@ -18,8 +18,8 @@ public:
 
 private:
 	std::string toString() const;
-	std::string toString(const OcrEntriesText entries) const;
+	std::string toString(const OcrEntriesArray entries) const;
 
 private:
-	OcrEntriesText _glyphText;
+	OcrEntriesArray _glyphArray;
 };

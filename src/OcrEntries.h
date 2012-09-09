@@ -3,17 +3,17 @@
 #include <vector>
 #include <string>
 
-typedef std::vector<std::string> OcrEntriesText;
+typedef std::vector<std::string> OcrEntriesArray;
 
 class OcrEntries {
 public:
-	OcrEntries(OcrEntriesText const entriesText);
+	OcrEntries(OcrEntriesArray const entriesArray);
 	virtual ~OcrEntries();
 
-	virtual OcrEntriesText toArray() const;
+	virtual OcrEntriesArray toArray() const;
 	virtual int Height() const;
 
 private:
-	OcrEntriesText _entriesText;
+	OcrEntriesArray _entriesArray;
 };
 

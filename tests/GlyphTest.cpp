@@ -14,8 +14,8 @@ TEST_GROUP(Glyph_given_glyph_is_3) {
 							"_|",
 							"_|",
 							"  "};
-		OcrEntriesText glyphText(arr, arr + 4);
-		glyph.reset(new Glyph(glyphText));
+		OcrEntriesArray glyphArray(arr, arr + 4);
+		glyph.reset(new Glyph(glyphArray));
 	}
 };
 
@@ -24,7 +24,7 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_then_it_matches) {
 			              "_|",
 			              "_|",
 			              "  "};
-	OcrEntriesText entries(arr, arr + 4);
+	OcrEntriesArray entries(arr, arr + 4);
 
 	bool isMatch = glyph.get()->MatchBackOfOcrEntries(entries);
 	CHECK(isMatch);
@@ -35,7 +35,7 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_4_then_it_matches) {
 			              "_| |_|",
 			              "_|   |",
 			              "      "};
-	OcrEntriesText entries(arr, arr + 4);
+	OcrEntriesArray entries(arr, arr + 4);
 
 	bool isMatch = glyph.get()->MatchBackOfOcrEntries(entries);
 	CHECK(isMatch);
@@ -46,7 +46,7 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_4_3_then_it_does_not_match) {
 			              "|_| _|",
 			              "  | _|",
 			              "      "};
-	OcrEntriesText entries(arr, arr + 4);
+	OcrEntriesArray entries(arr, arr + 4);
 
 	bool isMatch = glyph.get()->MatchBackOfOcrEntries(entries);
 	CHECK(!isMatch);
@@ -57,7 +57,7 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_empty_then_it_does_not_match) {
 			              "",
 			              "",
 			              ""};
-	OcrEntriesText entries(arr, arr + 4);
+	OcrEntriesArray entries(arr, arr + 4);
 
 	bool isMatch = glyph.get()->MatchBackOfOcrEntries(entries);
 	CHECK(!isMatch);
@@ -68,7 +68,7 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_missing_whitespace_then_it_does_not_m
 			              "_|",
 			              "_|",
 			              ""};
-	OcrEntriesText entries(arr, arr + 4);
+	OcrEntriesArray entries(arr, arr + 4);
 
 	bool isMatch = glyph.get()->MatchBackOfOcrEntries(entries);
 	CHECK(!isMatch);
@@ -93,8 +93,8 @@ TEST_GROUP(Glyph_given_glyph_is_6) {
 				   			  "|_ ",
 							  "|_|",
 							  "   "};
-		OcrEntriesText glyphText(arr, arr + 4);
-		glyph.reset(new Glyph(glyphText));
+		OcrEntriesArray glyphArray(arr, arr + 4);
+		glyph.reset(new Glyph(glyphArray));
 	}
 };
 
@@ -110,12 +110,12 @@ TEST_GROUP(Glyph_given_glyph_is_minimal) {
 TEST(Glyph_given_glyph_is_minimal, when_the_width_is_zero_then_an_exception_is_thrown) {
 	bool ok = true;
 
-	OcrEntriesText glyphText;
+	OcrEntriesArray glyphArray;
 	std::string arr[] = { "" };
-	glyphText = OcrEntriesText(arr, arr + 1);
+	glyphArray = OcrEntriesArray(arr, arr + 1);
 
 	try {
-		Glyph glyph(glyphText);
+		Glyph glyph(glyphArray);
 	} catch(std::invalid_argument& e) {
 		ok = false;
 	}
@@ -126,14 +126,14 @@ TEST(Glyph_given_glyph_is_minimal, when_the_width_is_zero_then_an_exception_is_t
 TEST(Glyph_given_glyph_is_minimal, when_the_height_is_less_than_4_an_exception_is_thrown) {
 	bool ok = true;
 
-	OcrEntriesText glyphText;
+	OcrEntriesArray glyphArray;
 	std::string arr[] = { "|",
 			              "|",
 			              "|" };
-	glyphText = OcrEntriesText(arr, arr + 1);
+	glyphArray = OcrEntriesArray(arr, arr + 1);
 
 	try {
-		Glyph glyph(glyphText);
+		Glyph glyph(glyphArray);
 	} catch(std::invalid_argument& e) {
 		ok = false;
 	}

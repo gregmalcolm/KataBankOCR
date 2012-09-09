@@ -3,14 +3,14 @@
 GlyphTranslator::GlyphTranslator() : _values("") {
 }
 
-GlyphTranslator::GlyphTranslator(const OcrEntriesText& entries) {
+GlyphTranslator::GlyphTranslator(const OcrEntriesArray& entries) {
 	SetEntries(entries);
 }
 
 GlyphTranslator::~GlyphTranslator() {
 }
 
-void GlyphTranslator::SetEntries(OcrEntriesText const entries) {
+void GlyphTranslator::SetEntries(OcrEntriesArray const entries) {
 	if (entries[0].compare(" ") == 0) {
 		_values += "1";
 	} else {

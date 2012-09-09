@@ -3,25 +3,25 @@
 
 using namespace std;
 
-Glyph::Glyph(OcrEntriesText const glyphText) : _glyphText(glyphText) {
+Glyph::Glyph(OcrEntriesArray const glyphArray) : _glyphArray(glyphArray) {
 	validate();
 }
 
 Glyph::~Glyph() {
 }
 
-bool Glyph::MatchBackOfOcrEntries(const OcrEntriesText entries) {
+bool Glyph::MatchBackOfOcrEntries(const OcrEntriesArray entries) {
 	string glyphStr = toString();
 	string entriesStr = toString(entries);
 	return glyphStr.compare(entriesStr) == 0;
 }
 
 int Glyph::Width() const {
-	return _glyphText[0].size();
+	return _glyphArray[0].size();
 }
 
 int Glyph::Height() const {
-	return _glyphText.size();
+	return _glyphArray.size();
 }
 
 void Glyph::validate() const {
@@ -30,11 +30,11 @@ void Glyph::validate() const {
 }
 
 string Glyph::toString() const {
-	return toString(_glyphText);
+	return toString(_glyphArray);
 }
 
-string Glyph::toString(const OcrEntriesText entries) const {
-	OcrEntriesText::const_iterator iter;
+string Glyph::toString(const OcrEntriesArray entries) const {
+	OcrEntriesArray::const_iterator iter;
 	string str("");
 	for( iter = entries.begin(); iter < entries.end(); ++iter ) {
 		str += (*iter).substr(0, Width());

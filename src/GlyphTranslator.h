@@ -4,10 +4,10 @@
 class GlyphTranslator {
 public:
 	GlyphTranslator();
-	GlyphTranslator(const OcrEntriesText&entries);
+	GlyphTranslator(const OcrEntriesArray&entries);
 	virtual ~GlyphTranslator();
 
-	virtual void SetEntries(OcrEntriesText const entries);
+	virtual void SetEntries(OcrEntriesArray const entries);
 
 	virtual std::string GetValues();
 
