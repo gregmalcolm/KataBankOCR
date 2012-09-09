@@ -1,0 +1,17 @@
+#!/bin/bash
+
+dir=$PWD
+log=$dir/setup.log
+rm -rf Externals/* setup.log
+
+echo -e "Installing cpputest..." | tee $log
+echo -e "----------------------" | tee $log
+cd Externals
+curl -L http://sourceforge.net/projects/cpputest/files/cpputest/v3.1/CppUTest-v3.1.zip/download -o cpputest.zip | tee $log
+unzip cpputest.zip -d cpputest | tee $log
+cd cpputest
+make | tee $log
+
+echo -e "NOTE: You may also need to alter project 'Includes' to use the correct STL folder"
+
+cd $dir
