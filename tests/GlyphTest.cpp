@@ -1,7 +1,8 @@
 #include "../src/Glyph.h"
-#include <tr1/memory>
 
 #include <CppUTest/TestHarness.h>
+#include <tr1/memory>
+#include <stdexcept>
 
 typedef std::tr1::shared_ptr<Glyph> GlyphPtr;
 

@@ -1,14 +1,13 @@
 #pragma once
+
+#include "../src/OcrEntries.h"
 #include <iostream>
-#include <stdexcept>
 #include <vector>
 #include <string>
 
-typedef std::vector<std::string> OcrEntriesText;
-
 class Glyph {
 public:
-	Glyph(OcrEntriesText glyphText);
+	Glyph(OcrEntriesText const glyphText);
 	virtual ~Glyph();
 
 	virtual bool MatchBackOfOcrEntries(const OcrEntriesText entries);

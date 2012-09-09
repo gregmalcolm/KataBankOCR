@@ -1,8 +1,9 @@
 #include "Glyph.h"
+#include <stdexcept>
 
 using namespace std;
 
-Glyph::Glyph(OcrEntriesText glyphText) : _glyphText(glyphText) {
+Glyph::Glyph(OcrEntriesText const glyphText) : _glyphText(glyphText) {
 	validate();
 }
 
