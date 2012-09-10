@@ -10,13 +10,13 @@ public:
     Glyph(OCRDataArray const dataArray);
     virtual ~Glyph() {};
 
-    virtual bool MatchBackOfOCREntries(const OCREntries entries);
-    virtual bool MatchBackOfOCREntries(const OCREntries entries,
+    virtual bool matchBackOfOCREntries(const OCREntries entries);
+    virtual bool matchBackOfOCREntries(const OCREntries entries,
     		                           OCREntries& remainder);
-    virtual void Validate() const;
+    virtual void validate() const;
 
 private:
-    void LocalValidate() const;
+    void localValidate() const;
 
 private:
     std::string toString() const;

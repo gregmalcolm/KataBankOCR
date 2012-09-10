@@ -4,10 +4,10 @@ GlyphTranslator::GlyphTranslator() : _values("") {
 }
 
 GlyphTranslator::GlyphTranslator(const OCRDataArray& entries) {
-    SetEntries(entries);
+    setEntries(entries);
 }
 
-void GlyphTranslator::SetEntries(OCRDataArray const entries) {
+void GlyphTranslator::setEntries(OCRDataArray const entries) {
     if (entries[0].compare(" ") == 0) {
         _values += "1";
     } else {
@@ -15,6 +15,6 @@ void GlyphTranslator::SetEntries(OCRDataArray const entries) {
     }
 }
 
-std::string GlyphTranslator::GetValues() {
+std::string GlyphTranslator::getValues() {
     return _values;
 }

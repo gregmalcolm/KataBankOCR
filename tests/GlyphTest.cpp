@@ -31,7 +31,7 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_then_it_matches) {
     OCRDataArray dataArray(arr, arr + 4);
     OCREntries entries(dataArray);
 
-    bool isMatch = glyph.get()->MatchBackOfOCREntries(entries);
+    bool isMatch = glyph.get()->matchBackOfOCREntries(entries);
     CHECK(isMatch);
 }
 
@@ -43,7 +43,7 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_4_then_it_matches) {
     OCRDataArray dataArray(arr, arr + 4);
     OCREntries entries(dataArray);
 
-    bool isMatch = glyph.get()->MatchBackOfOCREntries(entries);
+    bool isMatch = glyph.get()->matchBackOfOCREntries(entries);
     CHECK(isMatch);
 }
 
@@ -55,7 +55,7 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_4_3_then_it_does_not_match) {
     OCRDataArray dataArray(arr, arr + 4);
     OCREntries entries(dataArray);
 
-    bool isMatch = glyph.get()->MatchBackOfOCREntries(entries);
+    bool isMatch = glyph.get()->matchBackOfOCREntries(entries);
     CHECK(!isMatch);
 }
 
@@ -68,8 +68,8 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_not_3_the_remainder_is_3) {
     OCREntries entries(dataArray);
     OCREntries remainder;
 
-    glyph.get()->MatchBackOfOCREntries(entries, remainder);
-    CHECK(remainder.Width() == 3);
+    glyph.get()->matchBackOfOCREntries(entries, remainder);
+    CHECK(remainder.width() == 3);
 }
 
 TEST(Glyph_given_glyph_is_3, when_entry_is_empty_then_it_does_not_match) {
@@ -80,7 +80,7 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_empty_then_it_does_not_match) {
     OCRDataArray dataArray(arr, arr + 4);
     OCREntries entries(dataArray);
 
-    bool isMatch = glyph.get()->MatchBackOfOCREntries(entries);
+    bool isMatch = glyph.get()->matchBackOfOCREntries(entries);
     CHECK(!isMatch);
 }
 

@@ -15,7 +15,7 @@ TEST(GlyphTranslator_given_the_constructor_is_9, then_the_value_is_9) {
     GlyphTranslator translator(entry);
 
     std::string value;
-    value = translator.GetValues();
+    value = translator.getValues();
     CHECK_EQUAL(0, value.compare("9"));
 };
 
@@ -30,9 +30,9 @@ TEST(GlyphTranslator, when_the_entry_is_1_then_the_value_is_1) {
                           " " };
     OCRDataArray entry(arr, arr + 4);
 
-    translator.SetEntries(entry);
+    translator.setEntries(entry);
 
     std::string value;
-    value = translator.GetValues();
+    value = translator.getValues();
     CHECK_EQUAL(0, value.compare("1"));
 };

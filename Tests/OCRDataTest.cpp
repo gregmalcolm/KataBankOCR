@@ -29,11 +29,11 @@ TEST(OCRData_given_entries_text_of_7_8, then_we_can_retrieve_the_inner_text_late
 }
 
 TEST(OCRData_given_entries_text_of_7_8, then_it_has_a_height_of_4) {
-    CHECK_EQUAL(4, data.get()->Height());
+    CHECK_EQUAL(4, data.get()->height());
 }
 
 TEST(OCRData_given_entries_text_of_7_8, then_it_has_a_width_of_6) {
-    CHECK_EQUAL(6, data.get()->Width());
+    CHECK_EQUAL(6, data.get()->width());
 }
 
 TEST_GROUP(OCRData_given_entries_text_of_2) {
@@ -50,7 +50,7 @@ TEST_GROUP(OCRData_given_entries_text_of_2) {
 };
 
 TEST(OCRData_given_entries_text_of_2, then_it_has_a_width_of_3) {
-    CHECK_EQUAL(3, data.get()->Width());
+    CHECK_EQUAL(3, data.get()->width());
 }
 
 

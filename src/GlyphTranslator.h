@@ -1,5 +1,5 @@
 #pragma once
-#include "../Src/glyph.h";
+#include "../Src/Glyph.h";
 
 class GlyphTranslator {
 public:
@@ -7,9 +7,9 @@ public:
     GlyphTranslator(const OCRDataArray&entries);
     virtual ~GlyphTranslator() {};
 
-    virtual void SetEntries(OCRDataArray const entries);
+    virtual void setEntries(OCRDataArray const entries);
 
-    virtual std::string GetValues();
+    virtual std::string getValues();
 
 private:
     std::string _values;

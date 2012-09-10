@@ -11,20 +11,20 @@ Glyph::Glyph(){
 
 Glyph::Glyph(OCRDataArray const dataArray)
 : super(dataArray) {
-	LocalValidate();
+	localValidate();
 }
 
-bool Glyph::MatchBackOfOCREntries(const OCREntries entries) {
+bool Glyph::matchBackOfOCREntries(const OCREntries entries) {
 	string glyphStr = toString();
     string entriesStr = toString(entries.toArray());
 
     return glyphStr.compare(entriesStr) == 0;
 }
 
-bool Glyph::MatchBackOfOCREntries(const OCREntries entries,
+bool Glyph::matchBackOfOCREntries(const OCREntries entries,
 		                          OCREntries& remainder) {
-	bool isMatch = MatchBackOfOCREntries(entries);
-    remainder.SetData(entries);
+	bool isMatch = matchBackOfOCREntries(entries);
+    remainder.setData(entries);
     return isMatch;
 }
 
@@ -36,18 +36,18 @@ string Glyph::toString(const OCRDataArray entries) const {
     OCRDataArray::const_iterator iter;
     string str("");
     for( iter = entries.begin(); iter < entries.end(); ++iter ) {
-        str += (*iter).substr(0, Width());
+        str += (*iter).substr(0, width());
     }
     return str;
 }
 
-void Glyph::Validate() const {
-	super::Validate();
+void Glyph::validate() const {
+	super::validate();
 
-	LocalValidate();
+	localValidate();
 }
-void Glyph::LocalValidate() const {
-    if (Width() == 0) {
+void Glyph::localValidate() const {
+    if (width() == 0) {
     	throw invalid_argument("The width is supposed to be greater than one character");
     }
 }
