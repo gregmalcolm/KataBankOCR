@@ -1,13 +1,13 @@
 #pragma once
-#include "../src/glyph.h";
+#include "../Src/glyph.h";
 
 class GlyphTranslator {
 public:
 	GlyphTranslator();
-	GlyphTranslator(const OcrEntriesArray&entries);
-	virtual ~GlyphTranslator();
+	GlyphTranslator(const OCRDataArray&entries);
+	virtual ~GlyphTranslator() {};
 
-	virtual void SetEntries(OcrEntriesArray const entries);
+	virtual void SetEntries(OCRDataArray const entries);
 
 	virtual std::string GetValues();
 

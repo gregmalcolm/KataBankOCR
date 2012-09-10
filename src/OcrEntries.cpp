@@ -1,16 +1,5 @@
-#include "OcrEntries.h"
+#include "OCREntries.h"
 
-OcrEntries::OcrEntries(OcrEntriesArray const entriesArray)
-  : _entriesArray(entriesArray) {
-}
-
-OcrEntries::~OcrEntries() {
-}
-
-OcrEntriesArray OcrEntries::toArray() const {
-	return _entriesArray;
-}
-
-int OcrEntries::Height() const {
-	return _entriesArray.size();
+OCREntries::OCREntries(OCRDataArray const dataArray)
+  : OCRData(dataArray) {
 }

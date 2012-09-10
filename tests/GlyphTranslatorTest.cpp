@@ -1,4 +1,4 @@
-#include "../src/GlyphTranslator.h"
+#include "../Src/GlyphTranslator.h"
 
 #include <CppUTest/TestHarness.h>
 
@@ -10,7 +10,7 @@ TEST(GlyphTranslator_given_the_constructor_is_9, then_the_value_is_9) {
 			              "|_|",
 			              " _|",
 			              "   "};
-	OcrEntriesArray entry(arr, arr + 4);
+	OCRDataArray entry(arr, arr + 4);
 
     GlyphTranslator translator(entry);
 
@@ -28,7 +28,7 @@ TEST(GlyphTranslator, when_the_entry_is_1_then_the_value_is_1) {
 			              "|",
 			              "|",
 			              " " };
-	OcrEntriesArray entry(arr, arr + 4);
+	OCRDataArray entry(arr, arr + 4);
 
 	translator.SetEntries(entry);
 

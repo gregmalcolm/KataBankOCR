@@ -1,25 +1,15 @@
 #pragma once
 
-#include "../src/OcrEntries.h"
-#include <iostream>
-#include <vector>
-#include <string>
+#include "OCRData.h"
 
-class Glyph {
+class Glyph : public OCRData {
 public:
-	Glyph(OcrEntriesArray const glyphArray);
-	virtual ~Glyph();
+	Glyph(OCRDataArray const dataArray);
+	virtual ~Glyph() {};
 
-	virtual bool MatchBackOfOcrEntries(const OcrEntriesArray entries);
-
-	virtual void validate() const;
-	virtual int Width() const;
-	virtual int Height() const;
+	virtual bool MatchBackOfOCREntries(const OCRDataArray entries);
 
 private:
 	std::string toString() const;
-	std::string toString(const OcrEntriesArray entries) const;
-
-private:
-	OcrEntriesArray _glyphArray;
+	std::string toString(const OCRDataArray entries) const;
 };
