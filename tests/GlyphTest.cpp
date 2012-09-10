@@ -18,9 +18,23 @@ TEST_GROUP(Glyph_given_glyph_is_3) {
                               " _|",
                               "   "};
         OCRDataArray glyphArray(arr, arr + 4);
-        glyph.reset(new Glyph(glyphArray));
+        glyph.reset(new Glyph(glyphArray, "3"));
     }
 };
+
+TEST(Glyph_given_glyph_is_3,
+		   then_value_is_3) {
+    std::string value(glyph.get()->getValue());
+    CHECK_EQUAL(value.compare("3"), 0);
+}
+
+TEST(Glyph_given_glyph_is_3,
+		   when_the_value_is_set_as_three_then_the_value_becomes_three) {
+	Glyph* gly(glyph.get());
+	gly->setValue("three");
+    CHECK_EQUAL(gly->getValue().compare("three"), 0);
+}
+
 
 TEST(Glyph_given_glyph_is_3,
 		   when_entry_is_exactly_3_then_it_matches) {
@@ -119,7 +133,7 @@ TEST_GROUP(Glyph_given_glyph_is_6) {
                               "|_|",
                               "   "};
         OCRDataArray glyphArray(arr, arr + 4);
-        glyph.reset(new Glyph(glyphArray));
+        glyph.reset(new Glyph(glyphArray, "6"));
     }
 };
 
@@ -142,7 +156,7 @@ TEST(Glyph, when_the_width_is_zero_then_an_exception_is_thrown) {
     dataArray = OCRDataArray(arr, arr + 4);
 
     try {
-        Glyph glyph(dataArray);
+        Glyph glyph(dataArray, "");
     } catch(std::invalid_argument& e) {
         ok = false;
     }

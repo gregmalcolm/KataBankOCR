@@ -9,8 +9,8 @@ typedef tr1::shared_ptr<const OCREntries> OCREntriesConstPtr;
 Glyph::Glyph(){
 }
 
-Glyph::Glyph(OCRDataArray const dataArray)
-: super(dataArray) {
+Glyph::Glyph(OCRDataArray const dataArray, const string value)
+: super(dataArray), _value(value) {
 	localValidate();
 }
 
@@ -51,6 +51,14 @@ void Glyph::validate() const {
 	super::validate();
 
 	localValidate();
+}
+
+string Glyph::getValue() const {
+	return _value;
+}
+
+void Glyph::setValue(std::string value) {
+	_value = value;
 }
 
 void Glyph::localValidate() const {

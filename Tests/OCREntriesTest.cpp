@@ -19,11 +19,22 @@ TEST_GROUP(OCREntries_given_entries_text_of_5_6) {
 };
 
 TEST(OCREntries_given_entries_text_of_5_6,
-                when_chopping_3_from_back_then_3_columns_will_be_removed) {
-	OCREntries reducedEntries(entries.chopFromBack(3));
+                when_chopping_from_back_then_3_columns_will_be_removed) {
+	OCREntries reducedEntries(entries.chopFromBack());
 
     CHECK(reducedEntries.toArray()[0].compare(" _ ") == 0);
     CHECK(reducedEntries.toArray()[1].compare("|_ ") == 0);
     CHECK(reducedEntries.toArray()[2].compare("|_|") == 0);
     CHECK(reducedEntries.toArray()[3].compare("   ") == 0);
+}
+
+
+TEST(OCREntries_given_entries_text_of_5_6,
+                when_chopping_2_from_back_then_2_columns_will_be_removed) {
+	OCREntries reducedEntries(entries.chopFromBack(2));
+
+    CHECK(reducedEntries.toArray()[0].compare("  _ ") == 0);
+    CHECK(reducedEntries.toArray()[1].compare(" |_ ") == 0);
+    CHECK(reducedEntries.toArray()[2].compare("||_|") == 0);
+    CHECK(reducedEntries.toArray()[3].compare("    ") == 0);
 }
