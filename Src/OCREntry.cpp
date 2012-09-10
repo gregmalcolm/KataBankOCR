@@ -1,33 +1,33 @@
-#include "OCREntries.h"
+#include "OCREntry.h"
 
 using namespace std;
 
 #include <stdexcept>
 
-OCREntries::OCREntries() {
+OCREntry::OCREntry() {
 }
 
-OCREntries::OCREntries(OCRDataArray const dataArray)
+OCREntry::OCREntry(OCRDataArray const dataArray)
   : super(dataArray) {
 	localValidate();
 }
 
-void OCREntries::validate() const {
+void OCREntry::validate() const {
 	super::validate();
 
 	localValidate();
 }
 
-OCREntries OCREntries::chopFromBack(const unsigned int columns) {
+OCREntry OCREntry::chopFromBack(const unsigned int columns) {
 	OCRDataArray arr(toArray());
 	OCRDataArrayIter iter;
     for( iter = arr.begin(); iter < arr.end(); ++iter ) {
         (*iter).erase(0, columns);
     }
-    return OCREntries(arr);
+    return OCREntry(arr);
 }
 
-void OCREntries::localValidate() const {
+void OCREntry::localValidate() const {
     if (width() > 27) {
     	throw invalid_argument("The width is supposed to be less than 27");
     }

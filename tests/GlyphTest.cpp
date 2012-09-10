@@ -1,6 +1,6 @@
 #include "../Src/Standard.h"
 #include "../Src/Glyph.h"
-#include "../Src/OCREntries.h"
+#include "../Src/OCREntry.h"
 
 #include <CppUTest/TestHarness.h>
 #include <tr1/memory>
@@ -43,9 +43,9 @@ TEST(Glyph_given_glyph_is_3,
                           " _|",
                           "   "};
     OCRDataArray dataArray(arr, arr + 4);
-    OCREntries entries(dataArray);
+    OCREntry entry(dataArray);
 
-    bool isMatch = glyph.get()->matchBackOfOCREntries(entries);
+    bool isMatch = glyph.get()->matchBackOfOCREntry(entry);
     CHECK(isMatch);
 }
 
@@ -56,10 +56,10 @@ TEST(Glyph_given_glyph_is_3,
                           " _|",
                           "   "};
     OCRDataArray dataArray(arr, arr + 4);
-    OCREntries entries(dataArray);
-    OCREntries remainder;
+    OCREntry entry(dataArray);
+    OCREntry remainder;
 
-    glyph.get()->matchBackOfOCREntries(entries, remainder);
+    glyph.get()->matchBackOfOCREntry(entry, remainder);
     CHECK_EQUAL(0, remainder.width());
 }
 
@@ -70,9 +70,9 @@ TEST(Glyph_given_glyph_is_3,
                           " _|  |",
                           "      "};
     OCRDataArray dataArray(arr, arr + 4);
-    OCREntries entries(dataArray);
+    OCREntry entry(dataArray);
 
-    bool isMatch = glyph.get()->matchBackOfOCREntries(entries);
+    bool isMatch = glyph.get()->matchBackOfOCREntry(entry);
     CHECK(isMatch);
 }
 
@@ -83,9 +83,9 @@ TEST(Glyph_given_glyph_is_3,
                           "  | _|",
                           "      "};
     OCRDataArray dataArray(arr, arr + 4);
-    OCREntries entries(dataArray);
+    OCREntry entry(dataArray);
 
-    bool isMatch = glyph.get()->matchBackOfOCREntries(entries);
+    bool isMatch = glyph.get()->matchBackOfOCREntry(entry);
     CHECK(!isMatch);
 }
 
@@ -96,10 +96,10 @@ TEST(Glyph_given_glyph_is_3,
                           "|_|",
                           "   "};
     OCRDataArray dataArray(arr, arr + 4);
-    OCREntries entries(dataArray);
-    OCREntries remainder;
+    OCREntry entry(dataArray);
+    OCREntry remainder;
 
-    glyph.get()->matchBackOfOCREntries(entries, remainder);
+    glyph.get()->matchBackOfOCREntry(entry, remainder);
     CHECK(remainder.toArray()[0].compare(" _ ") == 0);
     CHECK(remainder.toArray()[1].compare("| |") == 0);
     CHECK(remainder.toArray()[2].compare("|_|") == 0);
@@ -113,9 +113,9 @@ TEST(Glyph_given_glyph_is_3,
                           "",
                           ""};
     OCRDataArray dataArray(arr, arr + 4);
-    OCREntries entries(dataArray);
+    OCREntry entry(dataArray);
 
-    bool isMatch = glyph.get()->matchBackOfOCREntries(entries);
+    bool isMatch = glyph.get()->matchBackOfOCREntry(entry);
     CHECK(!isMatch);
 }
 

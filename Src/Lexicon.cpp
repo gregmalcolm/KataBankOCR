@@ -9,14 +9,14 @@ Lexicon::Lexicon() {
 	_glyphs = builder.build();
 }
 
-string Lexicon::parse(OCREntries const& entries, std::string values) {
+string Lexicon::parse(OCREntry const& entry, std::string values) {
 	bool isMatch = false;
 	GlyphListIter iter;
-	OCREntries remainder;
+	OCREntry remainder;
 
 	for(iter = _glyphs.begin(); iter != _glyphs.end(); ++iter) {
 
-		isMatch = (*iter).matchBackOfOCREntries( entries, remainder);
+		isMatch = (*iter).matchBackOfOCREntry( entry, remainder);
 		if (isMatch) {
 			values += (*iter).getValue();
 			return values = parse(remainder, values);

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-typedef tr1::shared_ptr<const OCREntries> OCREntriesConstPtr;
+typedef tr1::shared_ptr<const OCREntry> OCREntryConstPtr;
 
 Glyph::Glyph(){
 }
@@ -14,22 +14,22 @@ Glyph::Glyph(OCRDataArray const dataArray, const string value)
 	localValidate();
 }
 
-bool Glyph::matchBackOfOCREntries(const OCREntries entries) {
+bool Glyph::matchBackOfOCREntry(const OCREntry entry) {
 	string glyphStr = toString();
-    string entriesStr = toString(entries.toArray());
+    string entryStr = toString(entry.toArray());
 
-    return glyphStr.compare(entriesStr) == 0;
+    return glyphStr.compare(entryStr) == 0;
 }
 
-bool Glyph::matchBackOfOCREntries(OCREntries entries,
-		                          OCREntries& remainder) {
-	bool isMatch = matchBackOfOCREntries(entries);
+bool Glyph::matchBackOfOCREntry(OCREntry entry,
+		                          OCREntry& remainder) {
+	bool isMatch = matchBackOfOCREntry(entry);
 	if (isMatch) {
-		OCREntries const& chopped = entries.chopFromBack(width());
+		OCREntry const& chopped = entry.chopFromBack(width());
 		remainder.setData(chopped);
 	}
 	else {
-		remainder.setData(entries);
+		remainder.setData(entry);
 	}
     return isMatch;
 }
@@ -38,10 +38,10 @@ string Glyph::toString() const {
     return toString(getData());
 }
 
-string Glyph::toString(const OCRDataArray entries) const {
+string Glyph::toString(const OCRDataArray entry) const {
 	OCRDataArrayCIter iter;
     string str("");
-    for( iter = entries.begin(); iter < entries.end(); ++iter ) {
+    for( iter = entry.begin(); iter < entry.end(); ++iter ) {
         str += (*iter).substr(0, width());
     }
     return str;

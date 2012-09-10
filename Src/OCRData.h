@@ -20,7 +20,7 @@ public:
     virtual void validate() const = 0;
 };
 
-class OCREntries;
+class OCREntry;
 
 class OCRData : public IOCRData {
 public:

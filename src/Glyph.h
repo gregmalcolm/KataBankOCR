@@ -1,6 +1,6 @@
 #pragma once
 
-#include "OCREntries.h"
+#include "OCREntry.h"
 
 class Glyph : public OCRData {
 public:
@@ -10,9 +10,9 @@ public:
     Glyph(OCRDataArray const dataArray, const std::string value);
     virtual ~Glyph() {};
 
-    virtual bool matchBackOfOCREntries(const OCREntries entries);
-    virtual bool matchBackOfOCREntries(OCREntries entries,
-    		                           OCREntries& remainder);
+    virtual bool matchBackOfOCREntry(const OCREntry entry);
+    virtual bool matchBackOfOCREntry(OCREntry entry,
+    		                           OCREntry& remainder);
     virtual void validate() const;
 
     virtual std::string getValue() const;
@@ -21,7 +21,7 @@ public:
 private:
     void localValidate() const;
     std::string toString() const;
-    std::string toString(const OCRDataArray entries) const;
+    std::string toString(const OCRDataArray entry) const;
 
 private:
     std::string _value;
