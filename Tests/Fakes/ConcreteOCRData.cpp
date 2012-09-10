@@ -1,5 +1,8 @@
 #include "ConcreteOCRData.h"
 
+ConcreteOCRData::ConcreteOCRData() {
+}
+
 ConcreteOCRData::ConcreteOCRData(OCRDataArray const dataArray)
-  : OCRData(dataArray)  {
+  : super(dataArray)  {
 }
