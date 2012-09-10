@@ -1,4 +1,4 @@
-#include "../Src/standard.h"
+#include "../Src/Standard.h"
 
 #include "../Src/Glyph.h"
 #include "../Src/OCREntries.h"
@@ -23,7 +23,8 @@ TEST_GROUP(Glyph_given_glyph_is_3) {
     }
 };
 
-TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_then_it_matches) {
+TEST(Glyph_given_glyph_is_3,
+		   when_entry_is_exactly_3_then_it_matches) {
     std::string arr[] = { " _ ",
                           " _|",
                           " _|",
@@ -35,7 +36,22 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_then_it_matches) {
     CHECK(isMatch);
 }
 
-TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_4_then_it_matches) {
+TEST(Glyph_given_glyph_is_3,
+		   when_entry_is_3_the_remainder_is_nothing) {
+    std::string arr[] = { " _ ",
+                          " _|",
+                          " _|",
+                          "   "};
+    OCRDataArray dataArray(arr, arr + 4);
+    OCREntries entries(dataArray);
+    OCREntries remainder;
+
+    glyph.get()->matchBackOfOCREntries(entries, remainder);
+    CHECK_EQUAL(0, remainder.width());
+}
+
+TEST(Glyph_given_glyph_is_3,
+		   when_entry_is_exactly_3_4_then_it_matches) {
     std::string arr[] = { " _    ",
                           " _||_|",
                           " _|  |",
@@ -47,7 +63,8 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_3_4_then_it_matches) {
     CHECK(isMatch);
 }
 
-TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_4_3_then_it_does_not_match) {
+TEST(Glyph_given_glyph_is_3,
+		   when_entry_is_exactly_4_3_then_it_does_not_match) {
     std::string arr[] = { "    _ ",
                           "|_| _|",
                           "  | _|",
@@ -59,20 +76,25 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_exactly_4_3_then_it_does_not_match) {
     CHECK(!isMatch);
 }
 
-TEST(Glyph_given_glyph_is_3, when_entry_is_not_3_the_remainder_is_3) {
+TEST(Glyph_given_glyph_is_3,
+		   when_entry_is_0_the_remainder_is_0) {
     std::string arr[] = { " _ ",
-                          " _|",
-                          " _|",
+                          "| |",
+                          "|_|",
                           "   "};
     OCRDataArray dataArray(arr, arr + 4);
     OCREntries entries(dataArray);
     OCREntries remainder;
 
     glyph.get()->matchBackOfOCREntries(entries, remainder);
-    CHECK(remainder.width() == 3);
+    CHECK(remainder.toArray()[0].compare(" _ ") == 0);
+    CHECK(remainder.toArray()[1].compare("| |") == 0);
+    CHECK(remainder.toArray()[2].compare("|_|") == 0);
+    CHECK(remainder.toArray()[3].compare("   ") == 0);
 }
 
-TEST(Glyph_given_glyph_is_3, when_entry_is_empty_then_it_does_not_match) {
+TEST(Glyph_given_glyph_is_3,
+		   when_entry_is_empty_then_it_does_not_match) {
     std::string arr[] = { "",
                           "",
                           "",
@@ -83,6 +105,11 @@ TEST(Glyph_given_glyph_is_3, when_entry_is_empty_then_it_does_not_match) {
     bool isMatch = glyph.get()->matchBackOfOCREntries(entries);
     CHECK(!isMatch);
 }
+
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
 
 TEST_GROUP(Glyph_given_glyph_is_6) {
     GlyphPtr glyph;
@@ -96,6 +123,11 @@ TEST_GROUP(Glyph_given_glyph_is_6) {
         glyph.reset(new Glyph(glyphArray));
     }
 };
+
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
 
 TEST_GROUP(Glyph) {
 };

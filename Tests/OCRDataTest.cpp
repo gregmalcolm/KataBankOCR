@@ -20,7 +20,8 @@ TEST_GROUP(OCRData_given_entries_text_of_7_8) {
     }
 };
 
-TEST(OCRData_given_entries_text_of_7_8, then_we_can_retrieve_the_inner_text_later) {
+TEST(OCRData_given_entries_text_of_7_8,
+		     then_we_can_retrieve_the_inner_text_later) {
     OCRDataArray dataArray = data.get()->toArray();
     CHECK(dataArray[0].compare(" _  _ ") == 0);
     CHECK(dataArray[1].compare("  ||_|") == 0);
@@ -28,11 +29,13 @@ TEST(OCRData_given_entries_text_of_7_8, then_we_can_retrieve_the_inner_text_late
     CHECK(dataArray[3].compare("      ") == 0);
 }
 
-TEST(OCRData_given_entries_text_of_7_8, then_it_has_a_height_of_4) {
+TEST(OCRData_given_entries_text_of_7_8,
+		     then_it_has_a_height_of_4) {
     CHECK_EQUAL(4, data.get()->height());
 }
 
-TEST(OCRData_given_entries_text_of_7_8, then_it_has_a_width_of_6) {
+TEST(OCRData_given_entries_text_of_7_8,
+		     then_it_has_a_width_of_6) {
     CHECK_EQUAL(6, data.get()->width());
 }
 
@@ -52,7 +55,8 @@ TEST_GROUP(OCRData_given_entries_text_of_2) {
     }
 };
 
-TEST(OCRData_given_entries_text_of_2, then_it_has_a_width_of_3) {
+TEST(OCRData_given_entries_text_of_2,
+		     then_it_has_a_width_of_3) {
     CHECK_EQUAL(3, data.get()->width());
 }
 
@@ -109,15 +113,18 @@ TEST_GROUP(OCRData_given_no_initial_data) {
 	ConcreteOCRData data;
 };
 
-TEST(OCRData_given_no_initial_data, when_the_data_is_not_set_then_height_is_0) {
+TEST(OCRData_given_no_initial_data,
+		     when_the_data_is_not_set_then_height_is_0) {
 	CHECK_EQUAL(0, data.height())
 }
 
-TEST(OCRData_given_no_initial_data, when_the_data_is_not_set_then_width_is_0) {
+TEST(OCRData_given_no_initial_data,
+		     when_the_data_is_not_set_then_width_is_0) {
 	CHECK_EQUAL(0, data.width())
 }
 
-TEST(OCRData_given_no_initial_data, when_set_to_4_then_the_data_is_visible) {
+TEST(OCRData_given_no_initial_data,
+		     when_set_to_4_then_the_data_is_visible) {
     std::string arr[] = { "   ",
 							  "|_|",
 							  "  |",
@@ -133,7 +140,8 @@ TEST(OCRData_given_no_initial_data, when_set_to_4_then_the_data_is_visible) {
     CHECK(data.toArray()[3].compare("   ") == 0);
 }
 
-TEST(OCRData_given_no_initial_data, when_bad_data_is_set_then_an_exception_is_thrown) {
+TEST(OCRData_given_no_initial_data,
+		     when_bad_data_is_set_then_an_exception_is_thrown) {
     bool ok = true;
 
 	ConcreteOCRData empty;
@@ -144,4 +152,20 @@ TEST(OCRData_given_no_initial_data, when_bad_data_is_set_then_an_exception_is_th
     }
 
     CHECK_EQUAL(false, ok);
+}
+
+TEST(OCRData_given_no_initial_data,
+		     when_data_is_set_to_7_from_an_array_then_its_internal_data_changes) {
+    std::string arr[] = { " _ ",
+                          "  |",
+                          "  |",
+                          "   " };
+    OCRDataArray dataArray = OCRDataArray(arr, arr + 4);
+
+	data.setData(dataArray);
+
+	CHECK(data.toArray()[0].compare(" _ ") == 0);
+    CHECK(data.toArray()[1].compare("  |") == 0);
+    CHECK(data.toArray()[2].compare("  |") == 0);
+    CHECK(data.toArray()[3].compare("   ") == 0);
 }

@@ -12,7 +12,11 @@ OCRData::OCRData(OCRDataArray const dataArray)
 }
 
 void OCRData::setData(const IOCRData& data) {
-	_dataArray = data.toArray();
+	setData(data.toArray());
+}
+
+void OCRData::setData(const OCRDataArray& dataArray) {
+	_dataArray = dataArray;
 	validate();
 }
 

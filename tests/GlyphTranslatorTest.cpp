@@ -5,7 +5,8 @@
 TEST_GROUP(GlyphTranslator_given_the_constructor_is_9) {
 };
 
-TEST(GlyphTranslator_given_the_constructor_is_9, then_the_value_is_9) {
+TEST(GlyphTranslator_given_the_constructor_is_9,
+		             then_the_value_is_9) {
     std::string arr[] = { " _ ",
                           "|_|",
                           " _|",

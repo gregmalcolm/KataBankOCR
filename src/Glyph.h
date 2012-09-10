@@ -11,7 +11,7 @@ public:
     virtual ~Glyph() {};
 
     virtual bool matchBackOfOCREntries(const OCREntries entries);
-    virtual bool matchBackOfOCREntries(const OCREntries entries,
+    virtual bool matchBackOfOCREntries(OCREntries entries,
     		                           OCREntries& remainder);
     virtual void validate() const;
 

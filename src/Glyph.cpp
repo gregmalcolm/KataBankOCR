@@ -21,10 +21,16 @@ bool Glyph::matchBackOfOCREntries(const OCREntries entries) {
     return glyphStr.compare(entriesStr) == 0;
 }
 
-bool Glyph::matchBackOfOCREntries(const OCREntries entries,
+bool Glyph::matchBackOfOCREntries(OCREntries entries,
 		                          OCREntries& remainder) {
 	bool isMatch = matchBackOfOCREntries(entries);
-    remainder.setData(entries);
+	if (isMatch) {
+		OCREntries const& chopped = entries.chopFromBack(width());
+		remainder.setData(chopped);
+	}
+	else {
+		remainder.setData(entries);
+	}
     return isMatch;
 }
 
@@ -33,7 +39,7 @@ string Glyph::toString() const {
 }
 
 string Glyph::toString(const OCRDataArray entries) const {
-    OCRDataArray::const_iterator iter;
+	OCRDataArrayCIter iter;
     string str("");
     for( iter = entries.begin(); iter < entries.end(); ++iter ) {
         str += (*iter).substr(0, width());
@@ -46,6 +52,7 @@ void Glyph::validate() const {
 
 	localValidate();
 }
+
 void Glyph::localValidate() const {
     if (width() == 0) {
     	throw invalid_argument("The width is supposed to be greater than one character");
