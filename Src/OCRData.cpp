@@ -3,9 +3,17 @@
 
 using namespace std;
 
+OCRData::OCRData() {
+}
+
 OCRData::OCRData(OCRDataArray const dataArray)
   : _dataArray(dataArray) {
     LocalValidate();
+}
+
+void OCRData::SetData(const IOCRData& data) {
+	_dataArray = data.toArray();
+	Validate();
 }
 
 OCRDataArray OCRData::toArray() const {
@@ -17,7 +25,11 @@ unsigned int OCRData::Height() const {
 }
 
 unsigned int OCRData::Width() const {
-    return getData()[0].size();
+	if (Height() == 0) {
+		return 0;
+	} else {
+		return getData()[0].size();
+	}
 }
 
 void OCRData::Validate() const {

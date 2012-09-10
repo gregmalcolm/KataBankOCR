@@ -1,7 +1,13 @@
 #include "Glyph.h"
 #include <stdexcept>
+#include <tr1/memory>
 
 using namespace std;
+
+typedef tr1::shared_ptr<const OCREntries> OCREntriesConstPtr;
+
+Glyph::Glyph(){
+}
 
 Glyph::Glyph(OCRDataArray const dataArray)
 : super(dataArray) {
@@ -9,9 +15,17 @@ Glyph::Glyph(OCRDataArray const dataArray)
 }
 
 bool Glyph::MatchBackOfOCREntries(const OCREntries entries) {
-    string glyphStr = toString();
+	string glyphStr = toString();
     string entriesStr = toString(entries.toArray());
+
     return glyphStr.compare(entriesStr) == 0;
+}
+
+bool Glyph::MatchBackOfOCREntries(const OCREntries entries,
+		                          OCREntries& remainder) {
+	bool isMatch = MatchBackOfOCREntries(entries);
+    remainder.SetData(entries);
+    return isMatch;
 }
 
 string Glyph::toString() const {
