@@ -1,5 +1,4 @@
 #include "../Src/Standard.h"
-
 #include "../Src/Glyph.h"
 #include "../Src/OCREntries.h"
 

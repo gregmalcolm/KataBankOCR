@@ -10,6 +10,6 @@ public:
     OCREntries(OCRDataArray const dataArray);
     virtual ~OCREntries() {};
 
-    OCREntries chopFromBack(const unsigned int columns);
+    virtual OCREntries chopFromBack(const unsigned int columns);
 };
 
