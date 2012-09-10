@@ -8,6 +8,7 @@ LexiconBuilder::LexiconBuilder() {
 
 GlyphList LexiconBuilder::build() const {
 	GlyphList list;
+
 	list.push_back(buildZeroGlyph());
 	list.push_back(buildOneGlyph());
 	list.push_back(buildTwoGlyph());
@@ -18,7 +19,7 @@ GlyphList LexiconBuilder::build() const {
 	list.push_back(buildSevenGlyph());
 	list.push_back(buildEightGlyph());
 	list.push_back(buildNineGlyph());
-	list.push_back(buildSpaceGlyph());
+
 	return list;
 }
 
@@ -32,7 +33,7 @@ Glyph LexiconBuilder::buildZeroGlyph() const {
 }
 
 Glyph LexiconBuilder::buildOneGlyph() const {
-    std::string arr[] = { "  |",
+    std::string arr[] = { "   ",
                           "  |",
                           "  |",
                           "   "};

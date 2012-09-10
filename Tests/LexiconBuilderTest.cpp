@@ -19,7 +19,7 @@ TEST(LexiconBuilder, when_building_0_returns_a_glyph_with_data_of_0) {
 TEST(LexiconBuilder, when_building_1_returns_a_glyph_with_data_of_1) {
     Glyph const& glyph = builder.buildOneGlyph();
 
-    CHECK(glyph.toArray()[0].compare("  |") == 0);
+    CHECK(glyph.toArray()[0].compare("   ") == 0);
     CHECK(glyph.toArray()[1].compare("  |") == 0);
     CHECK(glyph.toArray()[2].compare("  |") == 0);
     CHECK(glyph.toArray()[3].compare("   ") == 0);
@@ -166,16 +166,10 @@ TEST(LexiconBuilder, when_building_9_returns_a_glyph_with_value_of_9) {
     CHECK(glyph.getValue().compare("9") == 0);
 }
 
-TEST(LexiconBuilder, when_building_space_returns_a_glyph_with_value_of_space) {
-    Glyph const& glyph = builder.buildSpaceGlyph();
-
-    CHECK(glyph.getValue().compare(" ") == 0);
-}
-
 TEST(LexiconBuilder,
-	 when_building_everything_then_a_list_of_11_glyphs_are_returned) {
+	when_building_everything_then_a_list_of_10_glyphs_are_returned) {
 	GlyphList list(builder.build());
 
 	unsigned int noOfGlyphs = list.size();
-	CHECK_EQUAL(11, noOfGlyphs);
+	CHECK_EQUAL(10, noOfGlyphs);
 }
