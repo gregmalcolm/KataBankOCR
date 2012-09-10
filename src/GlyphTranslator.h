@@ -3,14 +3,14 @@
 
 class GlyphTranslator {
 public:
-	GlyphTranslator();
-	GlyphTranslator(const OCRDataArray&entries);
-	virtual ~GlyphTranslator() {};
+    GlyphTranslator();
+    GlyphTranslator(const OCRDataArray&entries);
+    virtual ~GlyphTranslator() {};
 
-	virtual void SetEntries(OCRDataArray const entries);
+    virtual void SetEntries(OCRDataArray const entries);
 
-	virtual std::string GetValues();
+    virtual std::string GetValues();
 
 private:
-	std::string _values;
+    std::string _values;
 };

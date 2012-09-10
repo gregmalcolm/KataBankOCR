@@ -4,7 +4,7 @@
 
 class OCREntries : public OCRData {
 public:
-	OCREntries(OCRDataArray const dataArray);
-	virtual ~OCREntries() {};
+    OCREntries(OCRDataArray const dataArray);
+    virtual ~OCREntries() {};
 };
 

@@ -4,6 +4,6 @@
 
 class ConcreteOCRData : public OCRData {
 public:
-	ConcreteOCRData(OCRDataArray const dataArray);
-	virtual ~ConcreteOCRData() {};
+    ConcreteOCRData(OCRDataArray const dataArray);
+    virtual ~ConcreteOCRData() {};
 };
