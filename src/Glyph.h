@@ -1,13 +1,19 @@
 #pragma once
 
-#include "OCRData.h"
+#include "OCREntries.h"
 
 class Glyph : public OCRData {
 public:
+	typedef OCRData super;
+
     Glyph(OCRDataArray const dataArray);
     virtual ~Glyph() {};
 
-    virtual bool MatchBackOfOCREntries(const OCRDataArray entries);
+    virtual bool MatchBackOfOCREntries(const OCREntries entries);
+    virtual void Validate() const;
+
+private:
+    void LocalValidate() const;
 
 private:
     std::string toString() const;

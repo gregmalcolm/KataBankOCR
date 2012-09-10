@@ -5,7 +5,7 @@ using namespace std;
 
 OCRData::OCRData(OCRDataArray const dataArray)
   : _dataArray(dataArray) {
-    Validate();
+    LocalValidate();
 }
 
 OCRDataArray OCRData::toArray() const {
@@ -21,8 +21,13 @@ unsigned int OCRData::Width() const {
 }
 
 void OCRData::Validate() const {
-    if (Height() != 4) throw invalid_argument("The height is supposed to be 4 characters");
-    if (Width() == 0)  throw invalid_argument("The width is supposed to be greater than one character");
+	LocalValidate();
+}
+
+void OCRData::LocalValidate() const {
+    if (Height() != 4) {
+    	throw invalid_argument("The height is supposed to be 4 characters");
+    }
 
     for( unsigned int i = 1; i < Height(); ++i) {
         if (getData().at(i).size() != Width()) {

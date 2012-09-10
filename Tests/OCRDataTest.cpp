@@ -57,25 +57,6 @@ TEST(OCRData_given_entries_text_of_2, then_it_has_a_width_of_3) {
 TEST_GROUP(OCRData) {
 };
 
-TEST(OCRData, when_the_width_is_zero_then_an_exception_is_thrown) {
-    bool ok = true;
-
-    OCRDataArray dataArray;
-    std::string arr[] = { "",
-                          "",
-                          "",
-                          "" };
-    dataArray = OCRDataArray(arr, arr + 4);
-
-    try {
-        ConcreteOCRData data(dataArray);
-    } catch(std::invalid_argument& e) {
-        ok = false;
-    }
-
-    CHECK_EQUAL(false, ok);
-}
-
 TEST(OCRData, when_the_height_is_less_than_4_an_exception_is_thrown) {
     bool ok = true;
 
@@ -98,10 +79,10 @@ TEST(OCRData, when_the_width_of_rows_varies_an_exception_is_thrown) {
     bool ok = true;
 
     OCRDataArray dataArray;
-    std::string arr[] = { "- ",
-                          " |",
-                          " |",
-                          " "};
+    std::string arr[] = { " - ",
+                          "  |",
+                          "  |",
+                          "  "};
     dataArray = OCRDataArray(arr, arr + 4);
 
     try {

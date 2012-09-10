@@ -11,7 +11,7 @@ TEST_GROUP(OCREntries_given_entries_text_of_5_6) {
     void setup() {
         std::string arr[] = { " _  _ ",
                               "|_ |_ ",
-                                " _||_|",
+                              " _||_|",
                               "      "};
         OCRDataArray entriesArray(arr, arr + 4);
         entries.reset(new OCREntries(entriesArray));
