@@ -13,7 +13,10 @@ public:
 	Lexicon();
 	virtual ~Lexicon() {};
 
-	virtual std::string parse(OCREntry const & entry, std::string values = "");
+	virtual std::string parse(OCREntry const& entry);
+
+protected:
+	virtual std::string parse(OCREntry const& entry, const std::string values);
 
 private:
 	GlyphList _glyphs;

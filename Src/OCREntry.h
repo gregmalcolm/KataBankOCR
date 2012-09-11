@@ -2,6 +2,12 @@
 
 #include "OCRData.h"
 
+#include <list>
+
+typedef std::list<OCREntry> OCREntryList;
+typedef OCREntryList::iterator OCREntryListIter;
+typedef OCREntryList::const_iterator OCREntryListCIter;
+
 class OCREntry : public OCRData {
 public:
 	typedef OCRData super;

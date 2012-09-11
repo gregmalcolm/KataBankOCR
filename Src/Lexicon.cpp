@@ -9,7 +9,11 @@ Lexicon::Lexicon() {
 	_glyphs = builder.build();
 }
 
-string Lexicon::parse(OCREntry const& entry, std::string values) {
+string Lexicon::parse(OCREntry const& entry) {
+	return parse(entry, "");
+}
+
+string Lexicon::parse(OCREntry const& entry, string values) {
 	bool isMatch = false;
 	GlyphListIter iter;
 	OCREntry remainder;
