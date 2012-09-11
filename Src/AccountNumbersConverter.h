@@ -11,11 +11,12 @@ public:
 	AccountNumbersConverter(const std::string ocrText);
 	virtual ~AccountNumbersConverter() {};
 
-	virtual void read(const std::string ocrText);
+	virtual StringList read(const std::string ocrText);
 	virtual OCREntryList entries() const;
 	virtual StringList accountNumbers() const;
 
 private:
+	void validateLines(StringArray const lines);
 	StringArray toLines(const std::string& text) const;
 	OCRDataArray extractEntries(const StringArray lines);
 	StringList extractAccountNumbers();

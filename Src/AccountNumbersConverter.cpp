@@ -6,6 +6,7 @@ using namespace std;
 
 #include <sstream>
 #include <iostream>
+#include <stdexcept>
 
 AccountNumbersConverter::AccountNumbersConverter() {
 }
@@ -14,12 +15,13 @@ AccountNumbersConverter::AccountNumbersConverter(const string ocrText) {
 	read(ocrText);
 }
 
-void AccountNumbersConverter::read(const string ocrText) {
+StringList AccountNumbersConverter::read(const string ocrText) {
 	_entries.clear();
 
 	StringArray lines = toLines(ocrText);
+	validateLines(lines);
 	extractEntries(lines);
-	extractAccountNumbers();
+	return extractAccountNumbers();
 }
 
 OCREntryList AccountNumbersConverter::entries() const {
@@ -29,7 +31,8 @@ OCREntryList AccountNumbersConverter::entries() const {
 StringArray AccountNumbersConverter::toLines(const string& text) const {
 	StringArray lines;
 
-	stringstream ss(trim(text, "\n\r"));
+	string str = rtrim(text, "\n\r");
+	stringstream ss(str);
 	string line;
 	while(getline(ss, line, '\n')) {
 		lines.push_back(line);
@@ -69,4 +72,10 @@ StringList AccountNumbersConverter::extractAccountNumbers() {
 
 StringList AccountNumbersConverter::accountNumbers() const {
 	return _accountNumbers;
+}
+
+void AccountNumbersConverter::validateLines(StringArray const lines) {
+    if (lines.size() == 0) {
+    	throw invalid_argument("The file is empty!");
+    }
 }
