@@ -8,8 +8,8 @@ Release/
 .project
 .metadata
 bin/**
-tmp/**
-tmp/**/*
+*.in
+*.out
 *.tmp
 *.bak
 *.swp
