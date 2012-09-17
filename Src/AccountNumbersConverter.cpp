@@ -90,6 +90,10 @@ AccountList AccountNumbersConverter::extractAccounts() {
 
 		account.checksum = ( (*iter).getChecksum() );
 		account.isErroneous = (expectedChecksum != account.checksum);
+		account.displayText = account.number;
+		if (account.isErroneous) {
+			account.displayText += " ERR";
+		}
 
 		_accounts.push_back(account);
 	}

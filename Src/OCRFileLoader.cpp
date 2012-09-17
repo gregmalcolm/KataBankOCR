@@ -57,7 +57,7 @@ string OCRFileLoader::accountNumbersToString() {
 	string text("");
 	AccountListCIter iter;
 	for(iter = _accounts.begin(); iter != _accounts.end(); ++iter ) {
-		text += (*iter).number;
+		text += (*iter).displayText;
 		text += "\n";
 	}
 

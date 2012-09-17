@@ -30,7 +30,7 @@ TEST_GROUP(AccountNumbersConverter_given_data_is_loaded) {
 		data += "|_ |_| _| _|  ||_||_ |_   |\n";
 		data += " _|  | _||_   |  | _||_|  |\n";
 		data += "                           \n";
-		data += "0\n";
+		data += "2\n"; // Oh oh, supposed to be 0!
 
 		converter.read(data);
 		accounts = converter.accounts();
@@ -95,8 +95,9 @@ TEST(AccountNumbersConverter_given_data_is_loaded,
 		                     then_the_last_checksum_matches_the_ocr_entry_checksum) {
 	Account account = accounts.back();
 
-	CHECK_EQUAL(0, account.checksum);
+	CHECK_EQUAL(2, account.checksum);
 }
+
 
 TEST(AccountNumbersConverter_given_data_is_loaded,
 		                     then_the_first_checksum_is_good) {
@@ -106,11 +107,27 @@ TEST(AccountNumbersConverter_given_data_is_loaded,
 }
 
 TEST(AccountNumbersConverter_given_data_is_loaded,
-		                     then_the_last_checksum_is_good) {
+		                     then_the_last_checksum_is_incorrect) {
 	Account account = accounts.back();
 
-	CHECK(!account.isErroneous);
+	CHECK(account.isErroneous);
 }
+
+TEST(AccountNumbersConverter_given_data_is_loaded,
+						     then_the_first_display_text_item_matches_the_number) {
+	Account account = accounts.front();
+
+	CHECK_EQUAL(0, account.displayText.compare("012345678"));
+}
+
+TEST(AccountNumbersConverter_given_data_is_loaded,
+		                     then_the_last_display_text_shows_number_and_an_error_indicator) {
+	Account account = accounts.back();
+
+	CHECK_EQUAL(0, account.displayText.compare("543214567 ERR"));
+}
+
+
 
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
@@ -146,21 +163,6 @@ TEST(AccountNumbersConverter, when_read_is_called_then_it_returns_account_inform
 
 	CHECK_EQUAL(0, account.number.compare("987654321"));
 	CHECK(!account.isErroneous);
-}
-
-TEST(AccountNumbersConverter, when_the_checksum_is_bad_then_the_account_is_marked_erroneous) {
-	std::string data;
-	data += " _  _  _  _  _     _  _    \n";
-	data += "|_||_|  ||_ |_ |_| _| _|  |\n";
-	data += " _||_|  ||_| _|  | _||_   |\n";
-	data += "                           \n";
-	data += "3\n";
-
-	AccountNumbersConverter converter;
-	AccountList accounts = converter.read(data);
-	Account account = accounts.back();
-
-	CHECK(account.isErroneous);
 }
 
 TEST(AccountNumbersConverter,

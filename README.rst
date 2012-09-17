@@ -10,6 +10,7 @@ Configuration
 
 I'm working through this on Mac OS Lion, using GCC 4.2.1 using Eclipe Juno CDT
 
+
 Setup
 -----
 
@@ -20,3 +21,16 @@ Configure Includes to include CppUTest/include and Stl headers (I'm using /usr/i
 
 *Libs*
 Also add a lib for CppUTest/lib
+
+Running it
+----------
+
+KataBankOCR <input ocr files>, <output accounts numbers files>
+
+*Example:*
+  $ Debug/KataBankOCR SampleTestFiles/sample_ocr_file SampleTestFiles/account_numbers
+
+If you just want to see the test suite run, execute it without an arguments. Eg:
+
+  $ Debug/KataBankOCR
+

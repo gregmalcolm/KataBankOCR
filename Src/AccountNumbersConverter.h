@@ -10,6 +10,7 @@ struct Account {
 	std::string number;
 	int         checksum;
 	bool        isErroneous;
+	std::string displayText;
 };
 
 typedef std::list<Account>        AccountList;

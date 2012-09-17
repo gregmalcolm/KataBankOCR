@@ -25,7 +25,7 @@ TEST_GROUP(OCRFileLoader_given_the_input_file_has_2_entries) {
 		data += "| |  | _||_||_||_ |_   ||_|\n";
 		data += "|_|  ||_  _|  | _||_|  ||_|\n";
 		data += "                           \n";
-		data += "10\n";
+		data += "9\n";
 
 		std::ofstream ocrFile;
 		ocrFile.open(inputFilename.c_str());
@@ -43,8 +43,8 @@ TEST(OCRFileLoader_given_the_input_file_has_2_entries,
 
 	OCRFileLoader ocr(inputFilename);
 	AccountList accounts = ocr.accounts();
-	CHECK_EQUAL(0, accounts.front().number.compare("987654321"));
-	CHECK_EQUAL(0, accounts.back().number.compare("012945678"));
+	CHECK_EQUAL(0, accounts.front().displayText.compare("987654321"));
+	CHECK_EQUAL(0, accounts.back().displayText.compare("012945678 ERR"));
 }
 
 TEST(OCRFileLoader_given_the_input_file_has_2_entries,
@@ -67,7 +67,7 @@ TEST(OCRFileLoader_given_the_input_file_has_2_entries,
 
     remove(outputFilename.c_str());
 
-	CHECK_EQUAL(0, numbers.compare("987654321\n012945678"));
+	CHECK_EQUAL(0, numbers.compare("987654321\n012945678 ERR"));
 }
 
 ////////////////////////////////////////////////////////////////////
