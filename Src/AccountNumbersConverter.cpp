@@ -79,10 +79,10 @@ AccountList AccountNumbersConverter::extractAccounts() {
 	OCREntryListCIter iter;
 	Lexicon lex;
 	Account account;
-	OCREntry entry;
 
 	for(iter = _entries.begin(); iter != _entries.end(); ++iter) {
-		account.number = lex.parse((*iter));
+		account.number = lex.parse( (*iter) );
+		account.checksum = ( (*iter).getChecksum() );
 		_accounts.push_back(account);
 	}
 
@@ -91,19 +91,6 @@ AccountList AccountNumbersConverter::extractAccounts() {
 
 AccountList AccountNumbersConverter::accounts() const {
 	return _accounts;
-}
-
-IntList AccountNumbersConverter::checksums() const {
-	IntList checksums;
-	OCREntryListCIter iter;
-
-	int checksum = OCREntry::NO_CHECKSUM_SET;
-	for(iter = _entries.begin(); iter != _entries.end(); ++iter) {
-		checksum = (*iter).getChecksum();
-		checksums.push_back(checksum);
-	}
-
-	return checksums;
 }
 
 void AccountNumbersConverter::validateLines(StringArray const lines) {

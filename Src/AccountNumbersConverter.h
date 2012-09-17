@@ -1,7 +1,6 @@
 #pragma once
 
 #include "StringUtils.h"
-#include "IntUtils.h"
 #include "../Src/OCREntry.h"
 
 #include <string>
@@ -9,6 +8,7 @@
 
 struct Account {
 	std::string number;
+	int         checksum;
 };
 
 typedef std::list<Account>        AccountList;
@@ -24,7 +24,6 @@ public:
 	virtual AccountList  read(const std::string ocrText);
 	virtual OCREntryList entries() const;
 	virtual AccountList  accounts() const;
-	virtual IntList      checksums() const;
 
 private:
 	void         validateLines(StringArray const lines);
@@ -32,7 +31,6 @@ private:
 	OCRDataArray extractEntries(const StringArray lines);
 	int          extractChecksum(const std::string line);
 	AccountList  extractAccounts();
-	StringList   extractAccountNumbers();
 
 private:
 	OCREntryList _entries;

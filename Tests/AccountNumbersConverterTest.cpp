@@ -86,16 +86,16 @@ TEST(AccountNumbersConverter_given_data_is_loaded,
 
 TEST(AccountNumbersConverter_given_data_is_loaded,
 		                     then_the_first_checksum_matches_the_ocr_entry_checksum) {
-	IntList checksums = converter.checksums();
+	Account account = accounts.front();
 
-	CHECK_EQUAL(10, checksums.front());
+	CHECK_EQUAL(10, account.checksum);
 }
 
 TEST(AccountNumbersConverter_given_data_is_loaded,
 		                     then_the_last_checksum_matches_the_ocr_entry_checksum) {
-	IntList checksums = converter.checksums();
+	Account account = accounts.back();
 
-	CHECK_EQUAL(0, checksums.back());
+	CHECK_EQUAL(0, account.checksum);
 }
 
 /////////////////////////////////////////////////////////////////
