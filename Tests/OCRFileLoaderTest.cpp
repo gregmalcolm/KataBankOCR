@@ -20,10 +20,12 @@ TEST_GROUP(OCRFileLoader_given_the_input_file_has_2_entries) {
 		data += "|_||_|  ||_ |_ |_| _| _|  |\n";
 		data += " _||_|  ||_| _|  | _||_   |\n";
 		data += "                           \n";
+		data += "10\n";
 		data += " _     _  _     _  _  _  _ \n";
 		data += "| |  | _||_||_||_ |_   ||_|\n";
 		data += "|_|  ||_  _|  | _||_|  ||_|\n";
 		data += "                           \n";
+		data += "10\n";
 
 		std::ofstream ocrFile;
 		ocrFile.open(inputFilename.c_str());
@@ -68,8 +70,8 @@ TEST(OCRFileLoader_given_the_input_file_has_2_entries,
 	CHECK_EQUAL(0, numbers.compare("987654321\n012945678"));
 }
 
-//////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 TEST_GROUP(OCRFileLoader_given_there_are_1000_entries) {
 	std::string inputFilename;
@@ -88,10 +90,12 @@ TEST_GROUP(OCRFileLoader_given_there_are_1000_entries) {
 			data += "|_||_|  ||_ | ||_| _| _|  |\n";
 			data += "|_||_|  ||_||_|  | _||_   |\n";
 			data += "                           \n";
+			data += "9\n";
 			data += " _     _  _     _  _  _  _ \n";
 			data += "| |  | _||_||_||_ |_   ||_|\n";
 			data += "|_|  ||_  _|  | _||_|  ||_|\n";
 			data += "                           \n";
+			data += "2\n";
 			ocrFile << data;
 		}
 

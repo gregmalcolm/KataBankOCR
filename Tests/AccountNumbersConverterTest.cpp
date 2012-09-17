@@ -14,18 +14,22 @@ TEST_GROUP(AccountNumbersConverter_given_data_is_loaded) {
 		data += "| |  | _| _||_||_ |_   ||_|\n";
 		data += "|_|  ||_  _|  | _||_|  ||_|\n";
 		data += "                           \n";
+		data += "10\n";
 		data += " _  _  _  _  _     _  _    \n";
 		data += "|_||_|  ||_ |_ |_| _| _|  |\n";
 		data += " _||_|  ||_| _|  | _||_   |\n";
 		data += "                           \n";
+		data += "10\n";
 		data += "    _  _  _  _  _  _  _  _ \n";
 		data += "|_||_ |_   ||_||_||_|  ||_ \n";
 		data += "  | _||_|  ||_| _||_|  ||_|\n";
 		data += "                           \n";
+		data += "5\n";
 		data += " _     _  _        _  _  _ \n";
 		data += "|_ |_| _| _|  ||_||_ |_   |\n";
 		data += " _|  | _||_   |  | _||_|  |\n";
 		data += "                           \n";
+		data += "0\n";
 
 		converter.read(data);
 	}
@@ -100,13 +104,13 @@ TEST(AccountNumbersConverter,
     CHECK_EQUAL(false, ok);
 }
 
-
 TEST(AccountNumbersConverter, when_read_is_called_then_it_returns_account_numbers) {
 	std::string data;
 	data += " _  _  _  _  _     _  _    \n";
 	data += "|_||_|  ||_ |_ |_| _| _|  |\n";
 	data += " _||_|  ||_| _|  | _||_   |\n";
 	data += "                           \n";
+	data += "10\n";
 
 	AccountNumbersConverter converter;
 	StringList numbers = converter.read(data);

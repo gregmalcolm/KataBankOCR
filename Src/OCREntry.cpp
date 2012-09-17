@@ -1,14 +1,21 @@
 #include "OCREntry.h"
+#include "ChecksumCalculator.h"
 
 using namespace std;
 
 #include <stdexcept>
 
-OCREntry::OCREntry() {
+OCREntry::OCREntry()
+  : _checksum(NO_CHECKSUM_SET) {
 }
 
 OCREntry::OCREntry(OCRDataArray const dataArray)
-  : super(dataArray) {
+  : super(dataArray), _checksum(NO_CHECKSUM_SET) {
+	localValidate();
+}
+
+OCREntry::OCREntry(OCRDataArray const dataArray, const int checksum)
+  : super(dataArray), _checksum(checksum) {
 	localValidate();
 }
 
@@ -25,6 +32,14 @@ OCREntry OCREntry::chopFromBack(const unsigned int columns) {
         (*iter).erase(0, columns);
     }
     return OCREntry(arr);
+}
+
+void OCREntry::setChecksum(const int checksum) {
+	_checksum = checksum;
+}
+
+int OCREntry::getChecksum() const {
+	return _checksum;
 }
 
 void OCREntry::localValidate() const {

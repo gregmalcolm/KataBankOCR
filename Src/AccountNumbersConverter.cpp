@@ -43,16 +43,35 @@ StringArray AccountNumbersConverter::toLines(const string& text) const {
 
 OCRDataArray AccountNumbersConverter::extractEntries(const StringArray lines) {
 	OCRDataArray entryArray;
-	for (unsigned int i = 0; i < lines.size();) {
+	OCREntry entry;
+	int checksum = OCREntry::NO_CHECKSUM_SET;
+	for (unsigned int lineNo = 0; lineNo < lines.size();) {
 		entryArray.clear();
 
-		for (unsigned int row=0; row < 4 && i < lines.size(); ++row, ++i) {
-			entryArray.push_back(lines[i]);
+
+		for (unsigned int row=0; row < 5 && lineNo < lines.size(); ++row, ++lineNo) {
+			if (row < 4) {
+				entryArray.push_back(lines[lineNo]);
+			} else {
+			    checksum = extractChecksum(lines[lineNo]);
+			}
 		}
-		_entries.push_back(OCREntry(entryArray));
+
+		entry = OCREntry(entryArray, checksum);
+
+		_entries.push_back(entry);
 	}
 
 	return entryArray;
+}
+
+int AccountNumbersConverter::extractChecksum(const string line) {
+	int checksum = OCREntry::NO_CHECKSUM_SET;
+
+	istringstream ss(line);
+	ss >> checksum;
+
+	return checksum;
 }
 
 StringList AccountNumbersConverter::extractAccountNumbers() {
