@@ -15,13 +15,13 @@ AccountNumbersConverter::AccountNumbersConverter(const string ocrText) {
 	read(ocrText);
 }
 
-StringList AccountNumbersConverter::read(const string ocrText) {
+AccountList AccountNumbersConverter::read(const string ocrText) {
 	_entries.clear();
 
 	StringArray lines = toLines(ocrText);
 	validateLines(lines);
 	extractEntries(lines);
-	return extractAccountNumbers();
+	return extractAccounts();
 }
 
 OCREntryList AccountNumbersConverter::entries() const {
@@ -74,23 +74,36 @@ int AccountNumbersConverter::extractChecksum(const string line) {
 	return checksum;
 }
 
-StringList AccountNumbersConverter::extractAccountNumbers() {
-	_accountNumbers.clear();
+AccountList AccountNumbersConverter::extractAccounts() {
+	_accounts.clear();
 	OCREntryListCIter iter;
 	Lexicon lex;
-	string accountNumber;
+	Account account;
 	OCREntry entry;
 
 	for(iter = _entries.begin(); iter != _entries.end(); ++iter) {
-		accountNumber = lex.parse((*iter));
-		_accountNumbers.push_back(accountNumber);
+		account.number = lex.parse((*iter));
+		_accounts.push_back(account);
 	}
 
-	return _accountNumbers;
+	return _accounts;
 }
 
-StringList AccountNumbersConverter::accountNumbers() const {
-	return _accountNumbers;
+AccountList AccountNumbersConverter::accounts() const {
+	return _accounts;
+}
+
+IntList AccountNumbersConverter::checksums() const {
+	IntList checksums;
+	OCREntryListCIter iter;
+
+	int checksum = OCREntry::NO_CHECKSUM_SET;
+	for(iter = _entries.begin(); iter != _entries.end(); ++iter) {
+		checksum = (*iter).getChecksum();
+		checksums.push_back(checksum);
+	}
+
+	return checksums;
 }
 
 void AccountNumbersConverter::validateLines(StringArray const lines) {

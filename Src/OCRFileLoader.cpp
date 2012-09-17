@@ -46,20 +46,18 @@ void OCRFileLoader::saveAccountNumbers(string const inputFile) {
 
 void OCRFileLoader::parse(string data) {
 	AccountNumbersConverter converter(data);
-	_accountNumbers = converter.accountNumbers();
+	_accounts = converter.accounts();
 }
 
-StringList OCRFileLoader::accountNumbers() const {
-	return _accountNumbers;
+AccountList OCRFileLoader::accounts() const {
+	return _accounts;
 }
 
 string OCRFileLoader::accountNumbersToString() {
 	string text("");
-	StringListCIter iter;
-	string number;
-	for(iter = _accountNumbers.begin(); iter != _accountNumbers.end(); ++iter ) {
-		number = (*iter);
-		text += number;
+	AccountListCIter iter;
+	for(iter = _accounts.begin(); iter != _accounts.end(); ++iter ) {
+		text += (*iter).number;
 		text += "\n";
 	}
 

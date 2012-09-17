@@ -7,6 +7,7 @@
 
 TEST_GROUP(AccountNumbersConverter_given_data_is_loaded) {
 	AccountNumbersConverter converter;
+	AccountList accounts;
 
 	void setup() {
 		std::string data;
@@ -32,6 +33,7 @@ TEST_GROUP(AccountNumbersConverter_given_data_is_loaded) {
 		data += "0\n";
 
 		converter.read(data);
+		accounts = converter.accounts();
 	}
 };
 
@@ -64,25 +66,37 @@ TEST(AccountNumbersConverter_given_data_is_loaded,
 
 TEST(AccountNumbersConverter_given_data_is_loaded,
 		                     then_there_will_be_4_numbers_available) {
-	StringList numbers = converter.accountNumbers();
-	unsigned int size = numbers.size();
+	unsigned int size = accounts.size();
 	CHECK_EQUAL(4, size);
 }
 
 TEST(AccountNumbersConverter_given_data_is_loaded,
 		                     then_the_first_account_numbers_matches_the_ocr_entry) {
-	StringList numbers = converter.accountNumbers();
+	Account account = accounts.front();
 
-	CHECK_EQUAL(0, numbers.front().compare("012345678"));
+	CHECK_EQUAL(0, account.number.compare("012345678"));
 }
 
 TEST(AccountNumbersConverter_given_data_is_loaded,
 		                     then_the_last_account_numbers_matches_the_ocr_entry) {
-	StringList numbers = converter.accountNumbers();
+	Account account = accounts.back();
 
-	CHECK_EQUAL(0, numbers.back().compare("543214567"));
+	CHECK_EQUAL(0, account.number.compare("543214567"));
 }
 
+TEST(AccountNumbersConverter_given_data_is_loaded,
+		                     then_the_first_checksum_matches_the_ocr_entry_checksum) {
+	IntList checksums = converter.checksums();
+
+	CHECK_EQUAL(10, checksums.front());
+}
+
+TEST(AccountNumbersConverter_given_data_is_loaded,
+		                     then_the_last_checksum_matches_the_ocr_entry_checksum) {
+	IntList checksums = converter.checksums();
+
+	CHECK_EQUAL(0, checksums.back());
+}
 
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
@@ -113,9 +127,10 @@ TEST(AccountNumbersConverter, when_read_is_called_then_it_returns_account_number
 	data += "10\n";
 
 	AccountNumbersConverter converter;
-	StringList numbers = converter.read(data);
+	AccountList accounts = converter.read(data);
+	std::string number = accounts.back().number;
 
-	CHECK_EQUAL(0, numbers.back().compare("987654321"));
+	CHECK_EQUAL(0, number.compare("987654321"));
 }
 
 TEST(AccountNumbersConverter,

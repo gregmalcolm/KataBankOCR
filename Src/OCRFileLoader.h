@@ -1,6 +1,6 @@
 #pragma once
 
-#include "StringUtils.h"
+#include "AccountNumbersConverter.h";
 
 #include <string>
 
@@ -14,12 +14,12 @@ public:
 	virtual void open(std::string const inputFile);
 	virtual void saveAccountNumbers(std::string const outputFile);
 
-	virtual StringList accountNumbers() const;
+	virtual AccountList accounts() const;
 
 private:
 	void parse(std::string data);
 	std::string accountNumbersToString();
 
 private:
-	StringList _accountNumbers;
+	AccountList _accounts;
 };

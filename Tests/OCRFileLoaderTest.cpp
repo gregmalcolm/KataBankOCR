@@ -42,9 +42,9 @@ TEST(OCRFileLoader_given_the_input_file_has_2_entries,
 	               when_the_file_is_loaded_then_the_account_numbers_are_available) {
 
 	OCRFileLoader ocr(inputFilename);
-	StringList numbers = ocr.accountNumbers();
-	CHECK_EQUAL(0, numbers.front().compare("987654321"));
-	CHECK_EQUAL(0,  numbers.back().compare("012945678"));
+	AccountList accounts = ocr.accounts();
+	CHECK_EQUAL(0, accounts.front().number.compare("987654321"));
+	CHECK_EQUAL(0, accounts.back().number.compare("012945678"));
 }
 
 TEST(OCRFileLoader_given_the_input_file_has_2_entries,
