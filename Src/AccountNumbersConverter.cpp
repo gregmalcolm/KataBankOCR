@@ -1,4 +1,5 @@
 #include "AccountNumbersConverter.h"
+#include "ChecksumCalculator.h"
 #include "Lexicon.h"
 #include "StringUtils.h"
 
@@ -79,10 +80,17 @@ AccountList AccountNumbersConverter::extractAccounts() {
 	OCREntryListCIter iter;
 	Lexicon lex;
 	Account account;
+	ChecksumCalculator checksumCalc;
+	int expectedChecksum;
 
 	for(iter = _entries.begin(); iter != _entries.end(); ++iter) {
 		account.number = lex.parse( (*iter) );
+
+		expectedChecksum = checksumCalc.checksumFor(account.number);
+
 		account.checksum = ( (*iter).getChecksum() );
+		account.isErroneous = (expectedChecksum != account.checksum);
+
 		_accounts.push_back(account);
 	}
 

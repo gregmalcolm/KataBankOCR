@@ -9,6 +9,7 @@
 struct Account {
 	std::string number;
 	int         checksum;
+	bool        isErroneous;
 };
 
 typedef std::list<Account>        AccountList;

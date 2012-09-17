@@ -98,6 +98,20 @@ TEST(AccountNumbersConverter_given_data_is_loaded,
 	CHECK_EQUAL(0, account.checksum);
 }
 
+TEST(AccountNumbersConverter_given_data_is_loaded,
+		                     then_the_first_checksum_is_good) {
+	Account account = accounts.front();
+
+	CHECK(!account.isErroneous);
+}
+
+TEST(AccountNumbersConverter_given_data_is_loaded,
+		                     then_the_last_checksum_is_good) {
+	Account account = accounts.back();
+
+	CHECK(!account.isErroneous);
+}
+
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 
@@ -118,7 +132,7 @@ TEST(AccountNumbersConverter,
     CHECK_EQUAL(false, ok);
 }
 
-TEST(AccountNumbersConverter, when_read_is_called_then_it_returns_account_numbers) {
+TEST(AccountNumbersConverter, when_read_is_called_then_it_returns_account_information) {
 	std::string data;
 	data += " _  _  _  _  _     _  _    \n";
 	data += "|_||_|  ||_ |_ |_| _| _|  |\n";
@@ -128,9 +142,25 @@ TEST(AccountNumbersConverter, when_read_is_called_then_it_returns_account_number
 
 	AccountNumbersConverter converter;
 	AccountList accounts = converter.read(data);
-	std::string number = accounts.back().number;
+	Account account = accounts.back();
 
-	CHECK_EQUAL(0, number.compare("987654321"));
+	CHECK_EQUAL(0, account.number.compare("987654321"));
+	CHECK(!account.isErroneous);
+}
+
+TEST(AccountNumbersConverter, when_the_checksum_is_bad_then_the_account_is_marked_erroneous) {
+	std::string data;
+	data += " _  _  _  _  _     _  _    \n";
+	data += "|_||_|  ||_ |_ |_| _| _|  |\n";
+	data += " _||_|  ||_| _|  | _||_   |\n";
+	data += "                           \n";
+	data += "3\n";
+
+	AccountNumbersConverter converter;
+	AccountList accounts = converter.read(data);
+	Account account = accounts.back();
+
+	CHECK(account.isErroneous);
 }
 
 TEST(AccountNumbersConverter,
